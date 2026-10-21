@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 2027</title>
+  <meta name="description" content="Offerte di summer internship 2027 a Lugano, Milano e in Svizzera, con scadenze e tracker delle candidature.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a5a72'/%3E%3Cpath d='M9 22V10m0 0h11l-3 4 3 4H9' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+  <a class="skip" href="#view">Vai al contenuto</a>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <h1 class="brand">Stage 2027</h1>
+      <nav class="tabs" aria-label="Sezioni">
+        <a href="#offerte" data-tab="offerte">Offerte</a>
+        <a href="#candidature" data-tab="candidature">Candidature</a>
+        <a href="#fonti" data-tab="fonti">Fonti</a>
+        <a href="#profilo" data-tab="profilo">Profilo e CV</a>
+      </nav>
+      <p class="updated" id="updated"></p>
+    </div>
+  </header>
+
+  <main id="view" class="wrap" tabindex="-1">
+    <noscript><p>Questa pagina ha bisogno di JavaScript per mostrare le offerte.</p></noscript>
+  </main>
+
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" hidden aria-label="Dettaglio offerta" tabindex="-1"></aside>
+  <dialog id="addDialog" class="dialog" aria-labelledby="addTitle"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/vendor/docx.iife.js" defer></script>
+  <script src="assets/docgen.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

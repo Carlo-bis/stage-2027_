@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "_nota": "FILE DI ESEMPIO con dati inventati. Copialo, sostituisci i dati con i tuoi e caricalo nella scheda 'Profilo e CV'. Non caricare su GitHub il file con i tuoi dati veri. Ogni voce ha un testo in inglese (en) e uno in italiano (it); 'tags' sono le parole dell'offerta che fanno scegliere quella voce; 'optional': true = la voce compare solo se l'offerta la richiama; 'enabled': false = voce disattivata.",
+  "personal": {
+    "name": "Mario Rossi",
+    "email": "mario.rossi@example.com",
+    "phone": "+39 300 000 0000",
+    "address": "Città, Italy",
+    "linkedin": "Mario Rossi"
+  },
+  "profile_line": {
+    "en": "Master's student in Finance (Digital finance track) at USI Lugano, with M&A valuation experience (DCF and multiples).",
+    "it": "Studente del Master in Finance (indirizzo Digital finance) all'USI di Lugano, con esperienza di valutazioni M&A (DCF e multipli)."
+  },
+  "profile_addons": [
+    {
+      "tags": [
+        "venture capital",
+        "startup",
+        "start-up",
+        "private equity",
+        "growth",
+        "fintech"
+      ],
+      "en": "Bachelor's thesis on venture capital as a growth lever for innovative start-ups in Europe.",
+      "it": "Tesi triennale sul venture capital come leva di crescita per le startup innovative in Europa."
+    }
+  ],
+  "education": [
+    {
+      "title": {
+        "en": "Università della Svizzera Italiana – Master in Finance (SFI accredited)",
+        "it": "Università della Svizzera Italiana – Master in Finance (accreditato SFI)"
+      },
+      "place": "Lugano, Switzerland",
+      "dates": {
+        "en": "Sep 2026 – Jul 2028",
+        "it": "Set 2026 – Lug 2028"
+      },
+      "bullets": [
+        {
+          "en": "Track in Digital finance. Relevant courses: Financial econometrics, Investments, Machine learning, Risk management.",
+          "it": "Indirizzo Digital finance. Corsi rilevanti: Financial econometrics, Investments, Machine learning, Risk management.",
+          "tags": [
+            "digital",
+            "fintech",
+            "machine learning",
+            "risk",
+            "investment",
+            "econometrics",
+            "quant"
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Università Ca' Foscari – Venice School of Management",
+        "it": "Università Ca' Foscari – Venice School of Management"
+      },
+      "place": "Venice, Italy",
+      "dates": {
+        "en": "Sep 2023 – Jul 2026",
+        "it": "Set 2023 – Lug 2026"
+      },
+      "bullets": [
+        {
+          "en": "Bachelor's degree in Business Administration.",
+          "it": "Laurea triennale in Business Administration.",
+          "tags": []
+        },
+        {
+          "en": "Relevant courses: Corporate finance (30/30), Macroeconomics (27/30), Statistics (27/30), Monetary economics (30/30).",
+          "it": "Corsi rilevanti: Corporate finance (30/30), Macroeconomics (27/30), Statistics (27/30), Monetary economics (30/30).",
+          "tags": [
+            "corporate finance",
+            "valuation",
+            "macro",
+            "statistics",
+            "monetary"
+          ]
+        },
+        {
+          "en": "Thesis: venture capital as a growth lever for innovative start-ups in Europe.",
+          "it": "Tesi: il venture capital come leva di crescita per le startup innovative in Europa.",
+          "tags": [
+            "venture capital",
+            "startup",
+            "start-up",
+            "private equity",
+            "growth",
+            "fintech",
+            "innovation"
+          ],
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Warwick Business School",
+        "it": "Warwick Business School"
+      },
+      "place": "Coventry, United Kingdom",
+      "dates": {
+        "en": "Sep 2025 – Dec 2025",
+        "it": "Set 2025 – Dic 2025"
+      },
+      "bullets": [
+        {
+          "en": "Overseas exchange student selected for merit.",
+          "it": "Studente in scambio all'estero, selezionato per merito.",
+          "tags": []
+        },
+        {
+          "en": "Relevant courses: Corporate strategy (30/30), Marketing (29/30), Management accounting (27/30), Economics of public policy (30/30L).",
+          "it": "Corsi rilevanti: Corporate strategy (30/30), Marketing (29/30), Management accounting (27/30), Economics of public policy (30/30L).",
+          "tags": [
+            "strategy",
+            "marketing",
+            "accounting",
+            "policy"
+          ]
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": {
+        "en": "Corporate Finance Intern – M&A analyst",
+        "it": "Corporate Finance Intern – Analista M&A"
+      },
+      "org": "Studio EPICA, Venice",
+      "dates": {
+        "en": "Feb 2026 – Apr 2026",
+        "it": "Feb 2026 – Apr 2026"
+      },
+      "bullets": [
+        {
+          "en": "Performed company valuations in the Healthcare industry using DCF and multiples.",
+          "it": "Valutazioni di aziende del settore Healthcare con metodo DCF e multipli.",
+          "tags": [
+            "valuation",
+            "dcf",
+            "m&a",
+            "healthcare",
+            "multiples",
+            "investment banking",
+            "advisory"
+          ]
+        },
+        {
+          "en": "Developed business plans and conducted in-depth financial statement analysis to support strategic and investment decision-making.",
+          "it": "Sviluppo di business plan e analisi approfondita dei bilanci a supporto delle decisioni strategiche e di investimento.",
+          "tags": [
+            "business plan",
+            "financial statement",
+            "investment",
+            "corporate finance",
+            "credit"
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "President",
+        "it": "Presidente"
+      },
+      "org": "JEVE – Junior Enterprise Ca' Foscari Venezia, Venice",
+      "dates": {
+        "en": "Sep 2025 – Sep 2026",
+        "it": "Set 2025 – Set 2026"
+      },
+      "bullets": [
+        {
+          "en": "Led an association of 65+ students working daily with start-ups and SMEs.",
+          "it": "Guida di un'associazione di oltre 65 studenti che lavora ogni giorno con start-up e PMI.",
+          "tags": [
+            "start-up",
+            "startup",
+            "sme",
+            "leadership",
+            "team",
+            "venture",
+            "client",
+            "entrepreneur"
+          ]
+        },
+        {
+          "en": "Oversaw and developed institutional relations with local entities and institutions.",
+          "it": "Gestione e sviluppo delle relazioni istituzionali con enti e istituzioni locali.",
+          "tags": [
+            "institutional",
+            "stakeholder",
+            "relationship",
+            "public"
+          ]
+        },
+        {
+          "en": "Previously: Senior advisor (Mar 2025 – Aug 2025).",
+          "it": "In precedenza: Senior advisor (mar 2025 – ago 2025).",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Vice Marketing Manager",
+        "it": "Vice Marketing Manager"
+      },
+      "org": "JEVE – Junior Enterprise Ca' Foscari Venezia, Venice",
+      "dates": {
+        "en": "Sep 2024 – Feb 2025",
+        "it": "Set 2024 – Feb 2025"
+      },
+      "bullets": [
+        {
+          "en": "Managed a team of 7 people and reported weekly to the Executive Board.",
+          "it": "Gestione di un team di 7 persone con report settimanale al Consiglio Esecutivo.",
+          "tags": [
+            "team",
+            "management",
+            "leadership",
+            "reporting"
+          ]
+        },
+        {
+          "en": "Organized an event as PM with Serie A team Venezia FC (100+ participants).",
+          "it": "Organizzazione, come PM, di un evento con la squadra di Serie A Venezia FC (oltre 100 partecipanti).",
+          "tags": [
+            "event",
+            "project",
+            "marketing",
+            "sport"
+          ]
+        },
+        {
+          "en": "Previously: Marketing consultant (Dec 2023 – Aug 2024).",
+          "it": "In precedenza: Marketing consultant (dic 2023 – ago 2024).",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Events Assistant",
+        "it": "Events Assistant"
+      },
+      "org": "LexGo International Salamanca, Salamanca",
+      "dates": {
+        "en": "Jun 2022 – Jul 2022",
+        "it": "Giu 2022 – Lug 2022"
+      },
+      "bullets": [
+        {
+          "en": "Organized and managed children's activities in an English summer camp in Salamanca.",
+          "it": "Organizzazione e gestione di attività per bambini in un campo estivo di inglese a Salamanca.",
+          "tags": [
+            "spanish",
+            "english",
+            "international"
+          ]
+        }
+      ]
+    },
+    {
+      "enabled": false,
+      "_nota": "DA COMPLETARE: inserisci le date reali e metti enabled a true. Contenuti presi da quello che hai raccontato su Quantify Club.",
+      "title": {
+        "en": "Trader, Trading Desk",
+        "it": "Trader, Trading Desk"
+      },
+      "org": "Quantify Club, USI Lugano",
+      "dates": {
+        "en": "",
+        "it": ""
+      },
+      "bullets": [
+        {
+          "en": "Trade Forex on the club's trading desk: order management, order routing and execution.",
+          "it": "Trading sul Forex nel trading desk del club: gestione, instradamento ed esecuzione degli ordini.",
+          "tags": [
+            "trading",
+            "forex",
+            "fx",
+            "execution",
+            "markets",
+            "order",
+            "sales and trading"
+          ]
+        },
+        {
+          "en": "Built the desk's order management system from scratch together with the club's team.",
+          "it": "Sviluppo da zero, insieme al team del club, dell'order management system del desk.",
+          "tags": [
+            "python",
+            "system",
+            "technology",
+            "fintech",
+            "quant",
+            "data"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": {
+    "software": {
+      "en": "Office 365 (Word, PPT, Excel), Power BI, Python",
+      "it": "Office 365 (Word, PPT, Excel), Power BI, Python"
+    },
+    "languages": {
+      "en": "Italian (Native), English (C1+), Spanish (Fluent)",
+      "it": "Italiano (madrelingua), Inglese (C1+), Spagnolo (fluente)"
+    },
+    "volunteering": {
+      "en": "Municipal Youth Council of Porto Torres, Blood donor",
+      "it": "Consiglio comunale dei giovani di Porto Torres, donatore di sangue"
+    }
+  },
+  "letter": {
+    "intro": {
+      "en": "I am writing to apply for the {role} at {company}. I am a Master's student in Finance at Università della Svizzera Italiana (Digital finance track) and I am looking for a summer 2027 internship.",
+      "it": "Vi scrivo per candidarmi a {role} presso {company}. Sono studente del Master in Finance all'Università della Svizzera Italiana (indirizzo Digital finance) e cerco uno stage per l'estate 2027."
+    }
+  },
+  "letter_points": [
+    {
+      "id": "epica",
+      "tags": [
+        "valuation",
+        "dcf",
+        "m&a",
+        "corporate finance",
+        "financial statement",
+        "business plan",
+        "investment banking",
+        "advisory",
+        "healthcare",
+        "transaction",
+        "equity",
+        "credit",
+        "banking"
+      ],
+      "en": "At Studio EPICA I performed company valuations in the Healthcare industry using DCF and multiples, and developed business plans and financial statement analyses to support investment decisions.",
+      "it": "In Studio EPICA ho svolto valutazioni di aziende del settore Healthcare con DCF e multipli e ho sviluppato business plan e analisi di bilancio a supporto delle decisioni di investimento."
+    },
+    {
+      "id": "jeve",
+      "tags": [
+        "start-up",
+        "startup",
+        "sme",
+        "leadership",
+        "team",
+        "stakeholder",
+        "institutional",
+        "venture",
+        "entrepreneur",
+        "client",
+        "project"
+      ],
+      "en": "As President of JEVE – Junior Enterprise Ca' Foscari I led an association of 65+ students working daily with start-ups and SMEs, and oversaw relations with local institutions.",
+      "it": "Come Presidente di JEVE – Junior Enterprise Ca' Foscari ho guidato un'associazione di oltre 65 studenti che lavora ogni giorno con start-up e PMI e ho curato le relazioni con le istituzioni locali."
+    },
+    {
+      "id": "tesi",
+      "tags": [
+        "venture capital",
+        "vc",
+        "startup",
+        "start-up",
+        "private equity",
+        "growth",
+        "innovation",
+        "fintech",
+        "europe"
+      ],
+      "en": "My bachelor's thesis looks at venture capital as a growth lever for innovative start-ups in Europe.",
+      "it": "La mia tesi triennale riguarda il venture capital come leva di crescita per le startup innovative in Europa."
+    },
+    {
+      "id": "digital",
+      "tags": [
+        "digital",
+        "fintech",
+        "python",
+        "machine learning",
+        "data",
+        "quant",
+        "econometrics",
+        "risk",
+        "technology",
+        "power bi",
+        "analytics"
+      ],
+      "en": "In my Master's I follow the Digital finance track, with courses in financial econometrics, investments, machine learning and risk management, and I work with Python and Power BI.",
+      "it": "Nel Master seguo l'indirizzo Digital finance, con corsi di financial econometrics, investments, machine learning e risk management, e lavoro con Python e Power BI."
+    },
+    {
+      "id": "quantify",
+      "enabled": false,
+      "tags": [
+        "trading",
+        "forex",
+        "fx",
+        "execution",
+        "markets",
+        "order",
+        "quant",
+        "sales and trading"
+      ],
+      "en": "On the Quantify Club trading desk I trade Forex and handle order management, routing and execution; together with the team I built the desk's order management system from scratch.",
+      "it": "Nel trading desk di Quantify Club faccio trading sul Forex e mi occupo di gestione, instradamento ed esecuzione degli ordini; insieme al team ho sviluppato da zero l'order management system del desk."
+    }
+  ]
+}
