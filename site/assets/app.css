@@ -145,6 +145,22 @@ main#view { padding-top: 36px; padding-bottom: 80px; outline: none; }
 .excluded-wrap h3 { font-size: 16px; margin-bottom: 8px; }
 .excluded-list li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .excluded-list .why { color: var(--muted); display: block; }
+.excl-filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0 8px; }
+.excl-filters select { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 10px; font-size: 14px; color: var(--ink); max-width: 100%; }
+.menu { position: relative; }
+.menu-btn { list-style: none; cursor: pointer; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 28px 7px 10px; font-size: 14px; position: relative; user-select: none; }
+.menu-btn::-webkit-details-marker { display: none; }
+.menu-btn::after { content: ""; position: absolute; right: 11px; top: 50%; width: 6px; height: 6px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); }
+.menu[open] .menu-btn { border-color: var(--lake); }
+.menu-panel { position: absolute; z-index: 15; top: calc(100% + 4px); left: 0; min-width: 300px; max-width: min(92vw, 420px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); padding: 6px; }
+.menu-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 8px; font-size: 14px; }
+.menu-lbl { flex: 1; }
+.pick { font: inherit; font-size: 13px; cursor: pointer; min-width: 96px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); }
+.pick:hover { border-color: var(--lake); }
+.pick.on { background: var(--lake); border-color: var(--lake); color: var(--surface); }
+.menu-foot { border-top: 1px solid var(--line); margin-top: 4px; padding: 6px 4px 2px; }
+.excl-group { margin-top: 14px; }
+.excl-group h4 { font-size: 14px; margin-bottom: 2px; }
 
 /* ---- pannello di dettaglio ---- */
 .scrim { position: fixed; inset: 0; background: rgba(10, 20, 26, 0.35); z-index: 20; }
