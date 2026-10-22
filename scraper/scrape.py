@@ -275,7 +275,7 @@ def classify(raw: dict) -> dict:
         "duration_months": sorted(set(months)),
         "duration_ok": d_ok,
         "summer_ok": s_ok,
-        "relevance": relevance(title, description, raw.get("category", "")),
+        "relevance": "media" if raw.get("category") == "tech" else relevance(title, description, raw.get("category", "")),
         "verdict": verdict,
         "reasons": excluded if excluded else unknown,
     }
