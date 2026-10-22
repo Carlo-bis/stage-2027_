@@ -67,6 +67,7 @@
     view: "offerte",
     openId: null,
     lastTrigger: null,
+    exclF: { reasons: [], company: "", role: "" },
   };
   function savePrefs() { sset("prefs", S.prefs); }
   function saveApps() { sset("apps", S.apps); }
@@ -207,18 +208,118 @@
       "</button></li>";
   }
 
+  /* ---- offerte scartate: filtri per motivo (multiplo), azienda e tipo di ruolo ---- */
+  var ROLE_TYPES = [
+    ["tech", "Tecnologia / Engineering", /(software|engineer|developer|devops|data scien|machine learning|\bai\b|cyber|infrastructure|sviluppator)/i],
+    ["product", "Product / Design", /(product|\bpm\b|\bux\b|design)/i],
+    ["sales", "Sales / Trading", /(sales|trading|trader|distribution|client|relationship|business development)/i],
+    ["marketing", "Marketing / Comunicazione", /(marketing|communication|comunicazione|brand)/i],
+    ["ops", "HR / Legale / Operations", /(\bhr\b|human resources|recruit|legal|compliance|operations|audit|facilit|admin)/i],
+    ["finance", "Finance", /(financ|invest|bank|wealth|asset|portfolio|equity|credit|treasur|valuation|m&a|capital|venture|private|risk|quant|markets|fund|advis|analyst|fintech|payment|banc|gestione)/i],
+  ];
+  function roleType(title) {
+    for (var i = 0; i < ROLE_TYPES.length; i++) if (ROLE_TYPES[i][2].test(title || "")) return ROLE_TYPES[i][0];
+    return "altro";
+  }
+  function roleLabel(id) {
+    for (var i = 0; i < ROLE_TYPES.length; i++) if (ROLE_TYPES[i][0] === id) return ROLE_TYPES[i][1];
+    return "Altro / non specificato";
+  }
+  // "sede fuori criteri (Londra)" -> "sede fuori criteri": raggruppa i motivi uguali anche se i dettagli cambiano
+  function reasonKey(r) {
+    var k = String(r || "").split(/\s*[(:]/)[0].trim();
+    return k ? k.charAt(0).toUpperCase() + k.slice(1) : "Motivo non indicato";
+  }
+  function reasonKeys(e) {
+    var seen = [];
+    (e.reasons && e.reasons.length ? e.reasons : [""]).forEach(function (r) { var k = reasonKey(r); if (seen.indexOf(k) === -1) seen.push(k); });
+    return seen;
+  }
+
   function renderExcluded(excl) {
     var wrap = $("#excludedWrap");
     if (!excl.length) { wrap.innerHTML = ""; return; }
     var html = '<label class="check"><input type="checkbox" id="fExcl"' + (S.prefs.excluded ? " checked" : "") + "> Mostra le " + excl.length + " offerte scartate e perché</label>";
-    if (S.prefs.excluded) {
-      html += '<ul class="excluded-list">' + excl.map(function (e) {
-        return "<li><strong>" + esc(e.company) + "</strong>: " + esc(e.title) + (e.location ? " (" + esc(e.location) + ")" : "") +
-          '<span class="why">Scartata: ' + esc((e.reasons || []).join("; ")) + (e.url ? ' · <a href="' + esc(safeUrl(e.url)) + '" target="_blank" rel="noopener">annuncio</a>' : "") + "</span></li>";
-      }).join("") + "</ul>";
+    if (!S.prefs.excluded) {
+      wrap.innerHTML = html;
+      $("#fExcl").addEventListener("change", function (e) { S.prefs.excluded = e.target.checked; savePrefs(); renderExcluded(excl); });
+      return;
     }
+    var F = S.exclF;
+    var reasonCount = {}, companies = [], roles = [];
+    excl.forEach(function (e) {
+      reasonKeys(e).forEach(function (k) { reasonCount[k] = (reasonCount[k] || 0) + 1; });
+      if (companies.indexOf(e.company) === -1) companies.push(e.company);
+      var r = roleType(e.title);
+      if (roles.indexOf(r) === -1) roles.push(r);
+    });
+    companies.sort(function (x, y) { return x.localeCompare(y); });
+    // se un filtro salvato non esiste più nei dati lo azzero
+    F.reasons = F.reasons.filter(function (k) { return reasonCount[k]; });
+    if (F.company && companies.indexOf(F.company) === -1) F.company = "";
+    if (F.role && roles.indexOf(F.role) === -1) F.role = "";
+
+    html += '<div class="excl-filters">' +
+      '<details class="menu" id="reasonMenu"><summary class="menu-btn" id="reasonSummary"></summary><div class="menu-panel" role="group" aria-label="Motivi di scarto">' +
+      Object.keys(reasonCount).sort().map(function (k) {
+        return '<div class="menu-row"><span class="menu-lbl">' + esc(k) + ' <span class="muted">(' + reasonCount[k] + ')</span></span>' +
+          '<button type="button" class="pick" data-reason="' + esc(k) + '" aria-pressed="false">Seleziona</button></div>';
+      }).join("") +
+      '<div class="menu-foot"><button type="button" class="btn ghost small" id="reasonClear">Azzera la selezione</button></div></div></details>' +
+      '<label><span class="lbl" style="display:none">Azienda</span><select id="exCompany" aria-label="Filtra per azienda"><option value="">Tutte le aziende</option>' +
+      companies.map(function (c) { return '<option value="' + esc(c) + '">' + esc(c) + "</option>"; }).join("") + "</select></label>" +
+      '<label><span class="lbl" style="display:none">Tipo di ruolo</span><select id="exRole" aria-label="Filtra per tipo di ruolo"><option value="">Tutti i tipi di ruolo</option>' +
+      roles.map(function (r) { return '<option value="' + esc(r) + '">' + esc(roleLabel(r)) + "</option>"; }).join("") + "</select></label>" +
+      '</div><p class="muted small" id="exCount" aria-live="polite"></p><div id="exList"></div>';
     wrap.innerHTML = html;
     $("#fExcl").addEventListener("change", function (e) { S.prefs.excluded = e.target.checked; savePrefs(); renderExcluded(excl); });
+    $("#exCompany").value = F.company;
+    $("#exRole").value = F.role;
+
+    function refresh() {
+      $$("#reasonMenu .pick").forEach(function (b) {
+        var on = F.reasons.indexOf(b.getAttribute("data-reason")) !== -1;
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.textContent = on ? "Selezionato" : "Seleziona";
+        b.classList.toggle("on", on);
+      });
+      $("#reasonSummary").textContent = F.reasons.length ? "Motivi: " + plural(F.reasons.length, "selezionato", "selezionati") : "Tutti i motivi";
+      var list = excl.filter(function (e) {
+        if (F.company && e.company !== F.company) return false;
+        if (F.role && roleType(e.title) !== F.role) return false;
+        if (F.reasons.length && !reasonKeys(e).some(function (k) { return F.reasons.indexOf(k) !== -1; })) return false;
+        return true;
+      });
+      $("#exCount").textContent = "Mostro " + list.length + " di " + excl.length + (list.length === 1 ? " offerta scartata." : " offerte scartate.");
+      var groups = {};
+      list.forEach(function (e) {
+        reasonKeys(e).forEach(function (k) {
+          if (F.reasons.length && F.reasons.indexOf(k) === -1) return;
+          (groups[k] = groups[k] || []).push(e);
+        });
+      });
+      var keys = Object.keys(groups).sort();
+      $("#exList").innerHTML = keys.length ? keys.map(function (k) {
+        return '<section class="excl-group"><h4>' + esc(k) + " (" + groups[k].length + ')</h4><ul class="excluded-list">' + groups[k].map(function (e) {
+          var detail = (e.reasons || []).filter(function (r) { return reasonKey(r) === k; }).join("; ");
+          return "<li><strong>" + esc(e.company) + "</strong>: " + esc(e.title) + (e.location ? " (" + esc(e.location) + ")" : "") +
+            '<span class="why">' + esc(roleLabel(roleType(e.title))) + (detail && detail !== k ? " · " + esc(detail) : "") +
+            (e.url ? ' · <a href="' + esc(safeUrl(e.url)) + '" target="_blank" rel="noopener">annuncio</a>' : "") + "</span></li>";
+        }).join("") + "</ul></section>";
+      }).join("") : '<p class="empty"><strong>Nessuna offerta scartata con questi filtri.</strong></p>';
+    }
+
+    $$("#reasonMenu .pick").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-reason"), i = F.reasons.indexOf(k);
+        if (i === -1) F.reasons.push(k); else F.reasons.splice(i, 1);
+        refresh();
+      });
+    });
+    $("#reasonClear").addEventListener("click", function () { F.reasons = []; refresh(); });
+    $("#exCompany").addEventListener("change", function (e) { F.company = e.target.value; refresh(); });
+    $("#exRole").addEventListener("change", function (e) { F.role = e.target.value; refresh(); });
+    refresh();
   }
 
   /* ------------------------------------------------------------ righello scadenze */
@@ -611,7 +712,16 @@
       sset("manual", S.manual); saveApps(); closeDrawer(); render();
     }
   });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("#drawer").hidden) closeDrawer(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var m = $("#reasonMenu");
+    if (m && m.open) { m.open = false; return; }
+    if (!$("#drawer").hidden) closeDrawer();
+  });
+  document.addEventListener("click", function (e) {
+    var m = $("#reasonMenu");
+    if (m && m.open && !m.contains(e.target)) m.open = false;
+  });
   window.addEventListener("hashchange", route);
   var rz;
   window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(function () { if (S.view === "offerte") updateOfferte(); }, 150); });
