@@ -13,7 +13,7 @@
     { id: "withdrawn", label: "Ritirata" },
   ];
   var ACTIVE = ["todo", "applied", "assessment", "interviews", "offer"];
-  var CATEGORIES = { banca: "Banca", asset_management: "Asset management", vc_pe: "VC / PE", family_office: "Family office", fintech: "Fintech", altro: "Altro" };
+  var CATEGORIES = { banca: "Banca", asset_management: "Asset management", vc_pe: "VC / PE", family_office: "Family office", fintech: "Fintech", tech: "Tech", altro: "Altro" };
   var MON = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
   var LOC_PRIORITY = { lugano: 0, milano: 1, svizzera: 2, sconosciuta: 3, fuori: 4 };
 
@@ -63,7 +63,7 @@
     manual: sget("manual", []),
     profile: sget("profile", null),
     checks: sget("checks", {}),
-    prefs: Object.assign({ loc: "tutte", finance: true, check: true, excluded: false, q: "", sort: "scadenza", lang: "en", profileLine: true }, sget("prefs", {})),
+    prefs: Object.assign({ loc: "tutte", finance: true, tech: false, check: true, excluded: false, q: "", sort: "scadenza", lang: "en", profileLine: true }, sget("prefs", {})),
     view: "offerte",
     openId: null,
     lastTrigger: null,
@@ -103,7 +103,8 @@
     var q = S.prefs.q.trim().toLowerCase();
     var list = allOffers().filter(function (o) {
       if (o.verdict === "check" && !S.prefs.check) return false;
-      if (S.prefs.finance && o.relevance === "bassa") return false;
+      if (o.category === "tech" && !S.prefs.tech) return false;
+      if (o.category !== "tech" && S.prefs.finance && o.relevance === "bassa") return false;
       var lc = o.location_class;
       if (S.prefs.loc === "lugano" && lc !== "lugano") return false;
       if (S.prefs.loc === "milano" && lc !== "milano") return false;
@@ -138,6 +139,7 @@
         return '<label><input type="radio" name="loc" value="' + x[0] + '"' + (S.prefs.loc === x[0] ? " checked" : "") + '><span>' + x[1] + "</span></label>";
       }).join("") + "</div>" +
       '<label class="check"><input type="checkbox" id="fFinance"' + (S.prefs.finance ? " checked" : "") + '> Solo ruoli di finanza</label>' +
+      '<label class="check"><input type="checkbox" id="fTech"' + (S.prefs.tech ? ' checked' : '') + '> Includi aziende tech</label>' +
       '<label class="check"><input type="checkbox" id="fCheck"' + (S.prefs.check ? " checked" : "") + '> Mostra quelle da verificare</label>' +
       '<label><span class="lbl" style="display:none">Cerca</span><input class="field-search" id="fQ" type="search" placeholder="Cerca azienda o ruolo" value="' + esc(S.prefs.q) + '"></label>' +
       '<label><span class="lbl" style="display:none">Ordina</span><select id="fSort" aria-label="Ordina per">' + [["scadenza", "Ordina per scadenza"], ["recenti", "Ordina per novità"], ["azienda", "Ordina per azienda"]].map(function (x) {
@@ -149,6 +151,7 @@
     $$('input[name="loc"]').forEach(function (r) { r.addEventListener("change", function () { S.prefs.loc = r.value; savePrefs(); updateOfferte(); }); });
     $("#fFinance").addEventListener("change", function (e) { S.prefs.finance = e.target.checked; savePrefs(); updateOfferte(); });
     $("#fCheck").addEventListener("change", function (e) { S.prefs.check = e.target.checked; savePrefs(); updateOfferte(); });
+    $("#fTech").addEventListener("change", function (e) { S.prefs.tech = e.target.checked; savePrefs(); updateOfferte(); });
     $("#fQ").addEventListener("input", function (e) { S.prefs.q = e.target.value; savePrefs(); updateOfferte(); });
     $("#fSort").addEventListener("change", function (e) { S.prefs.sort = e.target.value; savePrefs(); updateOfferte(); });
     updateOfferte();
