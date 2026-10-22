@@ -38,6 +38,9 @@ jobs:
             --notify-out build/new_offers.md \
             --mention "${{ github.repository_owner }}"
 
+      - name: Controlla che i dati siano validi
+        run: python3 -c "import json; json.load(open('site/data/offers.json', encoding='utf-8')); print('offers.json valido')"
+
       - name: Salva i dati aggiornati
         run: |
           git config user.name "github-actions[bot]"
@@ -47,8 +50,10 @@ jobs:
             echo "Nessuna modifica ai dati."
           else
             git commit -m "Aggiornamento offerte $(date -u +%F)"
-            git pull --rebase || true
-            git push || echo "Push non riuscito (non blocca il sito)."
+            git fetch origin
+            # in caso di conflitto vince il file appena generato
+            git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+            git push origin HEAD:${{ github.ref_name }} || echo "Push non riuscito (non blocca il sito)."
           fi
 
       - name: Avvisa se ci sono nuove offerte
